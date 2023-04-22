@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Input } from "../../components/Input";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
   grid-area: header;
@@ -28,7 +29,7 @@ export const Search = styled(Input)`
   color: white;
 `;
 
-export const Profile = styled.div`
+export const Profile = styled(Link)`
   width: 35rem;
   height: 6.8rem;
   display: flex;
@@ -36,6 +37,9 @@ export const Profile = styled.div`
 
   font-size: 1.4rem;
   font-weight: bold;
+  color: white;
+
+  
 
   > div {
     display: flex;
