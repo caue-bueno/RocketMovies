@@ -47,8 +47,10 @@ export const Profile = styled(Link)`
     justify-content: center;
     align-items: flex-end;
 
-    a {
+    button {
       color: ${({ theme }) => theme.COLORS.GRAY_700};
+      border: none;
+      background: none;
     }
   }
 
