@@ -3,8 +3,19 @@ import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { FiArrowLeft , FiX, FiPlus } from "react-icons/fi";
+import { useState } from "react";
+import { NoteItem } from "../../components/NoteItem";
+
+
+
+
 
 export function Create() {
+
+  const [title, setTitle] = useState("");
+  const [rating, setRating] = useState("");
+  const [description, setDescription] = useState("");
+
   return (
     <Container>
       <Header />
@@ -16,15 +27,26 @@ export function Create() {
           <h1>Novo filme</h1>
           <form>
             <Box>
-              <Input placeholder="Título" />
-              <Input placeholder="Sua nota (de 0 a 5)" />
+              <Input 
+              placeholder="Título"
+              onChange={e => setTitle(e.target.value)} 
+              />
+              <Input 
+              placeholder="Sua nota (de 0 a 5)" 
+              onChange={e => setRating(e.target.value)}
+              />
             </Box>
-            <textarea placeholder="Observações" />
+            <textarea 
+            placeholder="Observações" 
+            onChange={e => setDescription(e.target.value)}
+            />
           </form>
           <h2>Marcadores</h2>
           <section>
-           <Tag>React <FiX /></Tag>
-           <New>Novo marcador <FiPlus /></New>
+           
+           <NoteItem
+           placeholder="Novo marcador"
+           />
           </section>
           <Box>
             <DeleteButton>Excluir filme</DeleteButton>

@@ -3,6 +3,7 @@ import { Container, Profile, Search } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth'
 import { api } from "../../service/api";
+import { useState } from "react";
 
 
 export function Header() {
@@ -10,7 +11,6 @@ export function Header() {
   const navigate = useNavigate();
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
-
 
   function handleSignOut() {
     navigate("/");
