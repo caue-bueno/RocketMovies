@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
 import { api } from "../service/api";
 
 const AuthContext = createContext({});
+
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
@@ -13,7 +13,7 @@ function AuthProvider({ children }) {
       const { user, token } = response.data;
 
       localStorage.setItem("@rocketmovies:user", JSON.stringify(user));
-      localStorage.setItem("@rocketmovies:token", token);      
+      localStorage.setItem("@rocketmovies:token", token);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       setData({ user, token });
@@ -21,24 +21,50 @@ function AuthProvider({ children }) {
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
-      }else {
+      } else {
         alert("Não foi possível fazer o login");
       }
     }
   }
 
-  function signOut () {
+  function signOut() {
     localStorage.removeItem("@rocketmovies:token");
     localStorage.removeItem("@rocketmovies:user");
 
     setData({});
   }
 
+  async function updateProfile({ user, avatarFile}) {
+    try {
+
+      if(avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+
+        const response = await api.patch("/users/avatar", fileUploadForm);
+        user.avatar = response.data.avatar;
+      }
+      
+      await api.put("/users", user);
+      localStorage.setItem("@rocketmovies:user", JSON.stringify(user));
+
+      setData({ user, token: data.token });
+      alert("Perfil foi atualizado!");
+
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar o perfil");
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@rocketmovies:token");
     const user = localStorage.getItem("@rocketmovies:user");
 
-    if(token && user) {
+    if (token && user) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       setData({
@@ -50,7 +76,7 @@ function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, signOut, updateProfile, user: data.user }}>
       {children}
     </AuthContext.Provider>
   )

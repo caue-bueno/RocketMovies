@@ -5,9 +5,13 @@ import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
 import { Body } from "../../components/Header/styles";
+import { useState } from "react";
 
 
 export function Home() {
+
+  const [search, setSearch] = useState("");
+
   return (
     <Container>
       <Header />

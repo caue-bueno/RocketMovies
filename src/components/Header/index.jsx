@@ -1,11 +1,21 @@
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Container, Profile, Search } from "./styles";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth'
-
+import { api } from "../../service/api";
 
 
 export function Header() {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+  const navigate = useNavigate();
+
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+
+
+  function handleSignOut() {
+    navigate("/");
+    signOut();
+  }
 
   return (
     <Container>
@@ -14,12 +24,12 @@ export function Header() {
       <Search placeholder="Pesquisar pelo título" type="text" />
       <Profile to="/profile">
         <div>
-          <p>Caue dos Santos</p>
-          <button onClick={signOut}>sair</button>
+          <p>{user.name}</p>
         </div>
 
-        <img src="https://github.com/caue-bueno.png" alt="Foto do Usuário" />
+        <img src={avatarUrl} alt="Foto do Usuário" />
       </Profile>
+          <button onClick={handleSignOut}>sair</button>
     </Container>
   );
 }
