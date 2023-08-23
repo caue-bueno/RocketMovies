@@ -42,6 +42,11 @@ export const Container = styled.div`
   }
 `;
 
+export const Body = styled.body`
+  height: calc(100vh - 11.6rem);
+  overflow-x: auto;
+`;
+
 export const Wrapper = styled.div`
   margin-bottom: 4rem;
   display: flex;
@@ -64,3 +69,5 @@ export const Wrapper = styled.div`
     border-radius: 0.8rem;
   }
 `;
+
+

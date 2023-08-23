@@ -1,10 +1,10 @@
-import { Container, Wrapper } from "./styles";
+import { Container, Wrapper, Body } from "./styles";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
-import { Body } from "../../components/Header/styles";
+// import { Body } from "../../components/Header/styles";
 import { useState } from "react";
 
 

@@ -19,10 +19,10 @@ export const Container = styled.header`
   }
 `;
 
-export const Body = styled.body`
-  height: calc(100vh - 11.6rem);
-  overflow-x: auto;
-`;
+// export const Body = styled.div`
+//   height: calc(100vh - 11.6rem);
+//   overflow-x: auto;
+// `;
 
 export const Search = styled(Input)`
   background-color: red;
