@@ -2,8 +2,29 @@ import { Container, Box, ArrowLeft, Star, Clock, StarEmpty, ButtonBack } from ".
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Tag } from "../../components/Tag";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { api } from "../../service/api";
+import { useAuth } from "../../hooks/auth";
 
 export function Preview() {
+
+const { user } = useAuth();
+
+const [data, setData] = useState(null);
+
+const params = useParams();
+
+useEffect(() => {
+  async function fetchNote() {
+    const response = await api.get(`/notes/${params.id}`);
+    console.log(response.data);
+    setData(response.data);
+  }
+  fetchNote();
+}, []);
+
   return (
     <Container>
       <Header />
@@ -13,7 +34,7 @@ export function Preview() {
         </ButtonBack>
         <main>
           <Box>
-            <h1>Interestellar</h1>
+            <h1>{data.title}</h1>
             <Star />
             <Star />
             <Star />
@@ -25,8 +46,8 @@ export function Preview() {
               src="https://github.com/caue-bueno.png"
               alt="Foto do Usuário"
             />{" "}
-            <span>Por Caue dos Santos</span> <Clock />{" "}
-            <span>23/05/22 às 08:00</span>
+            <span>Por {user.name}</span> <Clock />{" "}
+            <span></span>
           </Box>
           <section>
             <Tag title="Ficção científica" />
