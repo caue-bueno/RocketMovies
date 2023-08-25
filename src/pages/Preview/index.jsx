@@ -2,59 +2,72 @@ import { Container, Box, ArrowLeft, Star, Clock, StarEmpty, ButtonBack } from ".
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Tag } from "../../components/Tag";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { api } from "../../service/api";
 import { useAuth } from "../../hooks/auth";
+import React from "react";
+import { format } from "date-fns"
+
 
 export function Preview() {
 
-const { user } = useAuth();
+  const { user } = useAuth();
+  const params = useParams();
 
-const [data, setData] = useState(null);
-
-const params = useParams();
-
-useEffect(() => {
-  async function fetchNote() {
-    const response = await api.get(`/notes/${params.id}`);
-    console.log(response.data);
-    setData(response.data);
-  }
-  fetchNote();
-}, []);
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    async function fetchNote() {
+      const response = await api.get(`/notes/${params.id}`);
+      const createdAt = new Date(response.data.created_at)
+      response.data.created_at = format(createdAt, "dd/MM/yyyy HH:mm");
+      setData(response.data);
+    }
+    fetchNote();
+  }, []);
 
   return (
     <Container>
       <Header />
-      <body>
-        <ButtonBack>
-          <ButtonText title="Voltar" icon={ArrowLeft} url="/" />
-        </ButtonBack>
-        <main>
-          <Box>
-            <h1>{data.title}</h1>
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-            <StarEmpty />
-          </Box>
-          <Box>
-            <img
-              src="https://github.com/caue-bueno.png"
-              alt="Foto do Usuário"
-            />{" "}
-            <span>Por {user.name}</span> <Clock />{" "}
-            <span></span>
-          </Box>
-          <section>
-            <Tag title="Ficção científica" />
-            <Tag title={"Drama"} />
-            <Tag title={"Família"} />
-          </section>
-          <p>
+      {data &&
+        <body>
+          <ButtonBack>
+            <ButtonText title="Voltar" icon={ArrowLeft} url="/" />
+          </ButtonBack>
+          <main>
+            <Box>
+              <h1>{data.title}</h1>
+              {[...Array(5)].map((star, idx) => {
+                idx += 1;
+                return (
+                  <React.Fragment key={idx}>
+                   { idx <= data.rating ? <Star /> : <StarEmpty />}
+                  </React.Fragment>
+
+                );
+              })}
+
+            </Box>
+            <Box>
+              <img
+                src="https://github.com/caue-bueno.png"
+                alt="Foto do Usuário"
+              />
+              <span>Por {user.name}</span> <Clock />{" "}
+              <span>{data.created_at}</span>
+            </Box>
+            {data.tags &&
+              <section>
+                {
+                  data.tags.map(tag => (
+                    <Tag title={tag.name} key={tag.id} />
+                  ))
+                }
+              </section>
+            }
+            {data.description}
+            <p>
             Pragas nas colheitas fizeram a civilização humana regredir para uma
             sociedade agrária em futuro de data desconhecida. Cooper, ex-piloto
             da NASA, tem uma fazenda com sua família. Murphy, a filha de dez
@@ -88,8 +101,9 @@ useEffect(() => {
             atrasando a partida. Ao voltarem para a Endurance, Cooper e Amelia
             descobrem que 23 anos se passaram.
           </p>
-        </main>
-      </body>
+          </main>
+        </body>
+      }
     </Container>
   );
 }
