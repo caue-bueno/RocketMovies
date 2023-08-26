@@ -7,15 +7,16 @@ export const Container = styled.div`
     "header"
     "content";
 
-  body {
+  main {
     grid-area: content;
 
     padding: 5rem 12rem 0;
   }
 
-  main {
+`;
 
-    padding-right: 2.4rem;
+export const Content = styled.div`
+  padding-right: 2.4rem;
     margin-top: 1.5rem;
     height: 72rem;
     overflow-y: scroll;
@@ -72,7 +73,6 @@ export const Container = styled.div`
         font-size: 2rem;
         color: ${({ theme }) => theme.COLORS.PINK};
       }
-    }
 `;
 
 export const ButtonBack = styled.div`

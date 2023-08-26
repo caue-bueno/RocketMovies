@@ -1,4 +1,4 @@
-import { Container, Box, Tag, New, DeleteButton, SaveButton, ButtonBack } from "./styles";
+import { Container, Box, Tag, New, DeleteButton, SaveButton, ButtonBack, Content } from "./styles";
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
@@ -55,11 +55,11 @@ export function Create() {
   return (
     <Container>
       <Header />
-      <body>
+      <main>
         <ButtonBack>
           <ButtonText title="Voltar" icon={FiArrowLeft} url="/" />
         </ButtonBack>
-        <main>
+        <Content>
           <h1>Novo filme</h1>
           <form>
             <Box>
@@ -100,8 +100,8 @@ export function Create() {
             {/* <DeleteButton>Excluir filme</DeleteButton> */}
             <SaveButton onClick={handleSaveMovie}>Salvar alterações</SaveButton>
           </Box>
-        </main>
-      </body>
+        </Content>
+      </main>
     </Container>
   );
 }
