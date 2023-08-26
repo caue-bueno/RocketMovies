@@ -8,13 +8,15 @@ export const Container = styled.div`
     "header"
     "content";
 
-  body {
+  main {
     grid-area: content;
 
     padding: 5rem 12rem 0;
   }
 
-  main {
+`;
+
+export const Content = styled.div`
     height: 58.8rem;
     margin-top: 1rem;
     overflow-y: scroll;
@@ -30,7 +32,7 @@ export const Container = styled.div`
 
     scrollbar-color: ${({ theme }) => theme.COLORS.PINK} transparent;
     scrollbar-width: thin;
-  }
+  
 
   section {
     display: flex;
@@ -45,6 +47,7 @@ export const Container = styled.div`
   p {
     text-align: justify;
     margin-right: 1.6rem;
+    font-size: 2.4rem;
   }
 `;
 
