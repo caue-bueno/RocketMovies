@@ -1,5 +1,5 @@
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
-import { Container, Profile, Search } from "./styles";
+import { Container, Profile, Search, Wrapper } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth'
 import { api } from "../../service/api";
@@ -22,14 +22,15 @@ export function Header() {
       <h2>RocketMovies</h2>
 
       <Search placeholder="Pesquisar pelo título" type="text" />
-      <Profile to="/profile">
+      <Wrapper to="/profile">
         <div>
-          <p>{user.name}</p>
-        </div>
-
-        <img src={avatarUrl} alt="Foto do Usuário" />
-      </Profile>
+          <Profile to="/profile">
+            <p>{user.name}</p>
+          </Profile>
           <button onClick={handleSignOut}>sair</button>
+        </div>
+        <img src={avatarUrl} alt="Foto do Usuário" onClick={() => navigate("/profile")}/>
+      </Wrapper>
     </Container>
   );
 }

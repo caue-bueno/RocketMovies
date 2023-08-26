@@ -29,7 +29,8 @@ export const Search = styled(Input)`
   color: white;
 `;
 
-export const Profile = styled(Link)`
+export const Wrapper = styled.div`
+  position: relative;
   width: 35rem;
   height: 6.8rem;
   display: flex;
@@ -39,15 +40,17 @@ export const Profile = styled(Link)`
   font-weight: bold;
   color: white;
 
-  
-
   > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    min-width: 14.5rem;
 
     button {
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
       color: ${({ theme }) => theme.COLORS.GRAY_700};
       border: none;
       background: none;
@@ -56,7 +59,13 @@ export const Profile = styled(Link)`
 
   > img {
     width: 6.4rem;
-
+    cursor: pointer;
     border-radius: 50%;
   }
 `;
+
+export const Profile = styled(Link)`
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+`
