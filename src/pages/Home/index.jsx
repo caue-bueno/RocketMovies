@@ -1,10 +1,9 @@
-import { Container, Wrapper, Body } from "./styles";
+import { Container, Wrapper, Content } from "./styles";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
-// import { Body } from "../../components/Header/styles";
 import { useState } from "react";
 
 
@@ -16,14 +15,14 @@ export function Home() {
     <Container>
       <Header />
       
-      <Body>
+      <main>
         <Wrapper>
           <h1>Meus filmes</h1>
           <Link to="/create">
             <FiPlus /> Adicionar filme
           </Link>
         </Wrapper>
-        <main>
+        <Content>
           <Section title="Interestellar">
             <p>
               Pragas nas colheitas fizeram a civilização humana regredir para
@@ -229,8 +228,8 @@ export function Home() {
               <Tag title={"Família"} />
             </section>
           </Section>
-        </main>
-      </Body>
+        </Content>
+      </main>
     </Container>
   );
 }

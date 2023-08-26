@@ -7,14 +7,16 @@ export const Container = styled.div`
   "header"
   "content";
 
-  > body {
+  > main {
     grid-area: content;
-    
     padding: 5rem 12rem 0;
+    height: calc(100vh - 11.6rem);
+    overflow-x: auto;
+  }
+`;
 
-
-    main {
-      height: 47rem;
+export const Content = styled.div`
+  height: 47rem;
       margin-bottom: 5rem;
       display: flex;
       flex-direction: column;
@@ -32,19 +34,12 @@ export const Container = styled.div`
 
       scrollbar-color: ${({ theme }) => theme.COLORS.PINK} transparent;
       scrollbar-width: thin;
-    }
 
-    section {
+      > section {
       margin-top: 2rem;
       display: flex;
       gap: 1.5rem;
     }
-  }
-`;
-
-export const Body = styled.body`
-  height: calc(100vh - 11.6rem);
-  overflow-x: auto;
 `;
 
 export const Wrapper = styled.div`
