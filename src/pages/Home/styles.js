@@ -35,7 +35,7 @@ export const Content = styled.div`
       scrollbar-color: ${({ theme }) => theme.COLORS.PINK} transparent;
       scrollbar-width: thin;
 
-      > section {
+      section {
       margin-top: 2rem;
       display: flex;
       gap: 1.5rem;

@@ -5,10 +5,11 @@ import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { Tag } from "../../components/Tag";
 import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 
 
 export function Home() {
-
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
 
   return (
