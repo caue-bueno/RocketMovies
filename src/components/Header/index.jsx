@@ -6,10 +6,11 @@ import { api } from "../../service/api";
 import { useState } from "react";
 
 
-export function Header(setSearch) {
+export function Header({ setSearch, search }) {
   const { signOut, user } = useAuth();
   const navigate = useNavigate();
-
+  // console.log("header",typeof setSearch)
+  // console.log(search);
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 

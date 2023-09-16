@@ -10,9 +10,9 @@ import { Movie } from "../../components/Movie";
 
 
 export function Home() {
-  const { user } = useAuth();
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  console.log(search);
 
 
   useEffect(() => {
@@ -22,11 +22,11 @@ export function Home() {
     }
 
     fetchMovie();
-  }, []);
-
+  }, [search]);
+  // console.log("home",typeof setSearch)
   return (
     <Container>
-      <Header setSearch={setSearch}/>
+      <Header setSearch={setSearch} search={search}/>
       
       <main>
         <Wrapper>
