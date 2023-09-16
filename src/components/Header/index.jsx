@@ -6,9 +6,10 @@ import { api } from "../../service/api";
 import { useState } from "react";
 
 
-export function Header() {
+export function Header(setSearch) {
   const { signOut, user } = useAuth();
   const navigate = useNavigate();
+
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
@@ -21,7 +22,11 @@ export function Header() {
     <Container>
       <h2>RocketMovies</h2>
 
-      <Search placeholder="Pesquisar pelo título" type="text" />
+      <Search 
+        placeholder="Pesquisar pelo título"
+        type="text"
+        onChange={(event) => setSearch(event.target.value)} 
+        />
       <Wrapper to="/profile">
         <div>
           <Profile to="/profile">

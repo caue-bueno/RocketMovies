@@ -2,8 +2,6 @@ import { Container, Wrapper, Content } from "./styles";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
-import { Section } from "../../components/Section";
-import { Tag } from "../../components/Tag";
 import { useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../service/api";
@@ -13,8 +11,8 @@ import { Movie } from "../../components/Movie";
 
 export function Home() {
   const { user } = useAuth();
-  const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
 
 
   useEffect(() => {
@@ -28,7 +26,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
+      <Header setSearch={setSearch}/>
       
       <main>
         <Wrapper>
